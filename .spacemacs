@@ -543,10 +543,10 @@ See the header of this file for more information."
 )
 
 (defun dotspacemacs/user-init ()
-(setq configuration-layer-elpa-archives
-	'(("melpa-cn" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
-      ("org-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
-      ("gnu-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")))
+	(setq configuration-layer-elpa-archives
+		'(("melpa-cn" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
+      	("org-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
+      	("gnu-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")))
   "Initialization for user code:
 This function is called immediately after `dotspacemacs/init', before layer
 configuration.
@@ -570,52 +570,53 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
-;; neotree conf
-(setq projectile-switch-project-action 'neotree-projectile-action)
-(setq neo-show-hidden-files nil)
-(setq neo-smart-open t)
-(global-set-key [f2] 'neotree-toggle)
 
-;; org mode conf
-(setq org-image-actual-width (/ (display-pixel-width) 3))
-(setq org-ellipsis " ▾ ")
-(setq org-superstar-headline-bullets-list '(" " " " " " " " " " " "))
-(custom-set-faces
-	'(fixed-pitch ((t ( :family "Fira Code Retina" :height 110))))
-  	'(variable-pitch ((t (:family "ETBembo" :height 150 :weight thin))))
-  	'(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
-	'(org-level-1 ((t (:inherit outline-1 :height 1.2  :foreground "#FD971F" )))) 
-  	'(org-level-2 ((t (:inherit outline-2 :height 1.2  :foreground "#A6E22E")))) 
- 	'(org-level-3 ((t (:inherit outline-3 :height 1.2  :foreground "#66D9EF")))) 
- 	'(org-level-4 ((t (:inherit outline-4 :height 1.2  :foreground "#E6DB74")))) 
-  	'(org-level-5 ((t (:inherit outline-5 :height 1.2  :foreground "#A1EFE4")))) 
-  	'(org-level-6 ((t (:inherit outline-6 :height 1.2  :foreground "#A6E22E")))) 
-  	'(org-level-7 ((t (:inherit outline-7 :height 1.2  :foreground "#F92672")))) 
-  	'(org-level-8 ((t (:inherit outline-8 :height 1.2  :foreground "#66D9EF")))) 
- ) ;; end custom-set-faces
-(add-hook 'org-mode-hook #'variable-pitch-mode)
-(add-hook 'org-mode-hook #'writeroom-mode)
-(setq 
-	org-hide-leading-stars t
-      org-hide-emphasis-markers t
-      ;; show actually italicized text instead of /italicized text/
-      )
-(global-set-key (kbd "C-c w") #'writeroom-mode)
-(global-set-key (kbd "C-c l") #'org-store-link)
-(global-set-key (kbd "C-c a") #'org-agenda)
-(global-set-key (kbd "C-c c") #'org-capture)
-(setq org-log-done 'time)
-(setq org-todo-keywords '((sequence "TODO" "PROGRESS" "|" "DONE" "CANCELLED")))
-(setq org-todo-keyword-faces
-      '(("TODO" . "#ab5183")
-        ("PROGRESS" . "#4d96c6")
-        ("CANCELLED" . "#f78c2c")
-        ("DONE" . "#d92947")))
-(setq hl-todo-keyword-faces
-      '(("TODO" . "#ab5183")
-        ("PROGRESS" . "#4d96c6")
-        ("CANCELLED" . "#f78c2c")
-        ("DONE" . "#d92947")))
+	;; neotree conf
+	(setq projectile-switch-project-action 'neotree-projectile-action)
+	(setq neo-show-hidden-files nil)
+	(setq neo-smart-open t)
+	(global-set-key [f2] 'neotree-toggle)
+
+	;; org mode conf
+	(custom-set-faces
+		'(fixed-pitch ((t ( :family "Fira Code Retina" :height 110))))
+  		'(variable-pitch ((t (:family "ETBembo" :height 150 :weight thin))))
+  		'(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
+		'(org-level-1 ((t (:inherit outline-1 :height 1.2  :foreground "#FD971F")))) 
+  		'(org-level-2 ((t (:inherit outline-2 :height 1.2  :foreground "#A6E22E")))) 
+ 		'(org-level-3 ((t (:inherit outline-3 :height 1.2  :foreground "#66D9EF")))) 
+ 		'(org-level-4 ((t (:inherit outline-4 :height 1.2  :foreground "#E6DB74")))) 
+  		'(org-level-5 ((t (:inherit outline-5 :height 1.2  :foreground "#A1EFE4")))) 
+  		'(org-level-6 ((t (:inherit outline-6 :height 1.2  :foreground "#A6E22E")))) 
+  		'(org-level-7 ((t (:inherit outline-7 :height 1.2  :foreground "#F92672")))) 
+  		'(org-level-8 ((t (:inherit outline-8 :height 1.2  :foreground "#66D9EF")))))
+ 	
+	(setq org-image-actual-width (/ (display-pixel-width) 3)) ;;change image'size in org-mode
+	(setq org-ellipsis " ▾ ")
+	(setq org-superstar-headline-bullets-list '(" " " " " " " " " " " "))
+	(setq org-hide-leading-stars t ;; hide * before headings
+      	org-hide-emphasis-markers t ;; show actually italicized text instead of /italicized text/
+      	)
+	(setq org-log-done 'time)
+	(setq org-todo-keywords '((sequence "TODO" "PROGRESS" "|" "DONE" "CANCELLED")))
+	(setq org-todo-keyword-faces
+      	'(("TODO" . "#ab5183")
+        	("PROGRESS" . "#4d96c6")
+        	("CANCELLED" . "#f78c2c")
+        	("DONE" . "#d92947")))
+	(setq hl-todo-keyword-faces
+      	'(("TODO" . "#ab5183")
+       	 ("PROGRESS" . "#4d96c6")
+        	("CANCELLED" . "#f78c2c")
+       	 ("DONE" . "#d92947")))
+       	 
+	(global-set-key (kbd "C-c w") #'writeroom-mode)
+	(global-set-key (kbd "C-c l") #'org-store-link)
+	(global-set-key (kbd "C-c a") #'org-agenda)
+	(global-set-key (kbd "C-c c") #'org-capture)
+	
+	(add-hook 'org-mode-hook #'variable-pitch-mode)
+	(add-hook 'org-mode-hook #'writeroom-mode)
         
 )
 
@@ -636,7 +637,7 @@ This function is called at the very end of Spacemacs initialization."
  '(org-agenda-files
    '("~/Todo/2022/AugustTodo.org" "/home/geo/Todo/LongtermTodo.org" "/home/geo/Todo/DailyTodo.org"))
  '(package-selected-packages
-   '(hide-mode-line ws-butler writeroom-mode winum which-key volatile-highlights vim-powerline vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org term-cursor symon symbol-overlay string-inflection string-edit spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline-all-the-icons space-doc restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio font-lock+ flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-ediff evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav elisp-def editorconfig dumb-jump drag-stuff dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line)))
+   '(yasnippet-snippets hide-mode-line ws-butler writeroom-mode winum which-key volatile-highlights vim-powerline vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org term-cursor symon symbol-overlay string-inflection string-edit spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline-all-the-icons space-doc restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio font-lock+ flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-ediff evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav elisp-def editorconfig dumb-jump drag-stuff dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

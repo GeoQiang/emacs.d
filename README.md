@@ -1,2 +1,2 @@
-# emacs.d
-Emacs setup
+# Spacemacs setup
+Personal Spacemacs setup.

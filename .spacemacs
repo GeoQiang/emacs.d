@@ -574,7 +574,7 @@ before packages are loaded."
 	(dolist (charset '(kana han symbol cjk-misc bopomofo))
  		 (set-fontset-font (frame-parameter nil 'font)
             	charset
-            	(font-spec :family "田英章楷书" )))
+            	(font-spec :family "田英章楷书" :size 20.0)))
             
 	;; neotree conf
 	(setq projectile-switch-project-action 'neotree-projectile-action)
@@ -585,7 +585,7 @@ before packages are loaded."
 	;; org mode conf
 	(custom-set-faces
 		'(fixed-pitch ((t ( :family "Fira Code Retina" :height 110))))
-  		'(variable-pitch ((t (:family "ETBembo" :height 150 :weight thin))))
+  		'(variable-pitch ((t (:family "ETBembo" :height 150))))
   		'(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
 		'(org-level-1 ((t (:inherit outline-1 :height 1.2  :foreground "#FD971F")))) 
   		'(org-level-2 ((t (:inherit outline-2 :height 1.2  :foreground "#A6E22E")))) 
@@ -595,8 +595,11 @@ before packages are loaded."
   		'(org-level-6 ((t (:inherit outline-6 :height 1.2  :foreground "#A6E22E")))) 
   		'(org-level-7 ((t (:inherit outline-7 :height 1.2  :foreground "#F92672")))) 
   		'(org-level-8 ((t (:inherit outline-8 :height 1.2  :foreground "#66D9EF")))))
- 	
-	(setq org-image-actual-width (/ (display-pixel-width) 3)) ;;change image'size in org-mode
+  		
+ 	;;modify the image size in org-mode
+	(setq org-image-actual-width (/ (display-pixel-width) 3)) 
+	
+	
 	(setq org-ellipsis " ▾ ")
 	(setq org-superstar-headline-bullets-list '(" " " " " " " " " " " "))
 	(setq org-hide-leading-stars t ;; hide * before headings
@@ -619,6 +622,9 @@ before packages are loaded."
 	(global-set-key (kbd "C-c l") #'org-store-link)
 	(global-set-key (kbd "C-c a") #'org-agenda)
 	(global-set-key (kbd "C-c c") #'org-capture)
+	
+	;; automatic line wrapping
+	(add-hook 'org-mode-hook (lambda() (setq truncate-lines nil)))
 	
 	(add-hook 'org-mode-hook #'variable-pitch-mode)
 	(add-hook 'org-mode-hook #'writeroom-mode)

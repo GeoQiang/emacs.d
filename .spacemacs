@@ -599,7 +599,7 @@ before packages are loaded."
  	;;modify the image size in org-mode
 	(setq org-image-actual-width (/ (display-pixel-width) 3)) 
 	
-	
+	(setq org-agenda-span 1)
 	(setq org-ellipsis " ▾ ")
 	(setq org-superstar-headline-bullets-list '(" " " " " " " " " " " "))
 	(setq org-hide-leading-stars t ;; hide * before headings

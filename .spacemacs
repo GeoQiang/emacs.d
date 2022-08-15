@@ -581,6 +581,7 @@ before packages are loaded."
 	(setq neo-show-hidden-files nil)
 	(setq neo-smart-open t)
 	(global-set-key [f2] 'neotree-toggle)
+	(add-hook 'neotree-mode-hook #'hidden-mode-line-mode)
 
 	;; org mode conf
 	(custom-set-faces
@@ -628,6 +629,7 @@ before packages are loaded."
 	
 	(add-hook 'org-mode-hook #'variable-pitch-mode)
 	(add-hook 'org-mode-hook #'writeroom-mode)
+	(add-hook 'org-mode-hook #'hidden-mode-line-mode)
         
 )
 

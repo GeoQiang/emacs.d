@@ -38,7 +38,8 @@ This function should only modify configuration layer settings."
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     ;; auto-completion
+     (auto-completion :variables
+                                 auto-completion-enable-snippets-in-popup t)
      ;; better-defaults
      emacs-lisp
      ;;git
@@ -570,6 +571,7 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
+
 	;; set chinese font
 	(dolist (charset '(kana han symbol cjk-misc bopomofo))
  		 (set-fontset-font (frame-parameter nil 'font)
@@ -588,14 +590,14 @@ before packages are loaded."
 		'(fixed-pitch ((t ( :family "Fira Code Retina" :height 110))))
   		'(variable-pitch ((t (:family "ETBembo" :height 150))))
   		'(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
-		'(org-level-1 ((t (:inherit outline-1 :height 1.2  :foreground "#FD971F")))) 
-  		'(org-level-2 ((t (:inherit outline-2 :height 1.2  :foreground "#A6E22E")))) 
- 		'(org-level-3 ((t (:inherit outline-3 :height 1.2  :foreground "#66D9EF")))) 
- 		'(org-level-4 ((t (:inherit outline-4 :height 1.2  :foreground "#E6DB74")))) 
-  		'(org-level-5 ((t (:inherit outline-5 :height 1.2  :foreground "#A1EFE4")))) 
-  		'(org-level-6 ((t (:inherit outline-6 :height 1.2  :foreground "#A6E22E")))) 
-  		'(org-level-7 ((t (:inherit outline-7 :height 1.2  :foreground "#F92672")))) 
-  		'(org-level-8 ((t (:inherit outline-8 :height 1.2  :foreground "#66D9EF")))))
+		'(org-level-1 ((t (:inherit outline-1 :height 1.2  :foreground "#black")))) 
+  		'(org-level-2 ((t (:inherit outline-2 :height 1.2  :foreground "#black")))) 
+ 		'(org-level-3 ((t (:inherit outline-3 :height 1.2  :foreground "#black")))) 
+ 		'(org-level-4 ((t (:inherit outline-4 :height 1.2  :foreground "#black")))) 
+  		'(org-level-5 ((t (:inherit outline-5 :height 1.2  :foreground "#black")))) 
+  		'(org-level-6 ((t (:inherit outline-6 :height 1.2  :foreground "#black")))) 
+  		'(org-level-7 ((t (:inherit outline-7 :height 1.2  :foreground "#black")))) 
+  		'(org-level-8 ((t (:inherit outline-8 :height 1.2  :foreground "#black")))))
   		
  	;;modify the image size in org-mode
 	(setq org-image-actual-width (/ (display-pixel-width) 3)) 
@@ -607,16 +609,16 @@ before packages are loaded."
       	org-hide-emphasis-markers t ;; show actually italicized text instead of /italicized text/
       	)
 	(setq org-log-done 'time)
-	(setq org-todo-keywords '((sequence "TODO" "PROGRESS" "|" "DONE" "CANCELLED")))
+	(setq org-todo-keywords '((sequence "TODO" "PROGRESS" "|" "DONE" "ABORT")))
 	(setq org-todo-keyword-faces
       	'(("TODO" . "#ab5183")
         	("PROGRESS" . "#4d96c6")
-        	("CANCELLED" . "#f78c2c")
+        	("ABORT" . "#f78c2c")
         	("DONE" . "#d92947")))
 	(setq hl-todo-keyword-faces
       	'(("TODO" . "#ab5183")
        	 ("PROGRESS" . "#4d96c6")
-        	("CANCELLED" . "#f78c2c")
+        	("ABORT" . "#f78c2c")
        	 ("DONE" . "#d92947")))
        	 
 	(global-set-key (kbd "C-c w") #'writeroom-mode)
@@ -648,9 +650,9 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(evil-want-Y-yank-to-eol nil)
  '(org-agenda-files
-   '("~/Todo/2022/AugustTodo.org" "/home/geo/Todo/LongtermTodo.org" "/home/geo/Todo/DailyTodo.org"))
+   '("~/Todo/remind.org" "/home/geo/Todo/project.org" "/home/geo/Todo/routines.org"))
  '(package-selected-packages
-   '(add-node-modules-path company-web web-completion-data company counsel-css counsel swiper ivy emmet-mode helm-css-scss impatient-mode htmlize simple-httpd prettier-js pug-mode sass-mode haml-mode scss-mode slim-mode tagedit web-beautify web-mode yasnippet yasnippet-snippets hide-mode-line ws-butler writeroom-mode winum which-key volatile-highlights vim-powerline vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org term-cursor symon symbol-overlay string-inflection string-edit spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline-all-the-icons space-doc restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio font-lock+ flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-ediff evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav elisp-def editorconfig dumb-jump drag-stuff dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line)))
+   '(ac-ispell auto-complete auto-yasnippet fuzzy helm-c-yasnippet helm-company add-node-modules-path company-web web-completion-data company counsel-css counsel swiper ivy emmet-mode helm-css-scss impatient-mode htmlize simple-httpd prettier-js pug-mode sass-mode haml-mode scss-mode slim-mode tagedit web-beautify web-mode yasnippet yasnippet-snippets hide-mode-line ws-butler writeroom-mode winum which-key volatile-highlights vim-powerline vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org term-cursor symon symbol-overlay string-inflection string-edit spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline-all-the-icons space-doc restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio font-lock+ flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-ediff evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav elisp-def editorconfig dumb-jump drag-stuff dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -658,14 +660,14 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(fixed-pitch ((t (:family "Fira Code Retina" :height 110))))
  '(highlight-parentheses-highlight ((nil (:weight ultra-bold))) t)
- '(org-level-1 ((t (:inherit outline-1 :height 1.2 :foreground "#FD971F"))))
- '(org-level-2 ((t (:inherit outline-2 :height 1.2 :foreground "#A6E22E"))))
- '(org-level-3 ((t (:inherit outline-3 :height 1.2 :foreground "#66D9EF"))))
- '(org-level-4 ((t (:inherit outline-4 :height 1.2 :foreground "#E6DB74"))))
- '(org-level-5 ((t (:inherit outline-5 :height 1.2 :foreground "#A1EFE4"))))
- '(org-level-6 ((t (:inherit outline-6 :height 1.2 :foreground "#A6E22E"))))
- '(org-level-7 ((t (:inherit outline-7 :height 1.2 :foreground "#F92672"))))
- '(org-level-8 ((t (:inherit outline-8 :height 1.2 :foreground "#66D9EF"))))
+ '(org-level-1 ((t (:inherit outline-1 :height 1.2 :foreground "#black"))))
+ '(org-level-2 ((t (:inherit outline-2 :height 1.2 :foreground "#black"))))
+ '(org-level-3 ((t (:inherit outline-3 :height 1.2 :foreground "#black"))))
+ '(org-level-4 ((t (:inherit outline-4 :height 1.2 :foreground "#black"))))
+ '(org-level-5 ((t (:inherit outline-5 :height 1.2 :foreground "#black"))))
+ '(org-level-6 ((t (:inherit outline-6 :height 1.2 :foreground "#black"))))
+ '(org-level-7 ((t (:inherit outline-7 :height 1.2 :foreground "#black"))))
+ '(org-level-8 ((t (:inherit outline-8 :height 1.2 :foreground "#black"))))
  '(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
- '(variable-pitch ((t (:family "ETBembo" :height 150 :weight thin)))))
+ '(variable-pitch ((t (:family "ETBembo" :height 150)))))
 )

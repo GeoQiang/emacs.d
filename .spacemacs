@@ -48,7 +48,7 @@ This function should only modify configuration layer settings."
      ;; lsp
      ;; markdown
      multiple-cursors
-     ;;org
+     org
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
@@ -546,7 +546,7 @@ See the header of this file for more information."
 (defun dotspacemacs/user-init ()
 	(setq configuration-layer-elpa-archives
 		'(("melpa-cn" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
-      	("org-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
+      	;;("org-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
       	("gnu-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")))
   "Initialization for user code:
 This function is called immediately after `dotspacemacs/init', before layer
@@ -570,7 +570,6 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-
 
 	;; set chinese font
 	(dolist (charset '(kana han symbol cjk-misc bopomofo))
@@ -620,11 +619,12 @@ before packages are loaded."
        	 ("PROGRESS" . "#4d96c6")
         	("ABORT" . "#f78c2c")
        	 ("DONE" . "#d92947")))
-       	 
+
 	(global-set-key (kbd "C-c w") #'writeroom-mode)
 	(global-set-key (kbd "C-c l") #'org-store-link)
 	(global-set-key (kbd "C-c a") #'org-agenda)
 	(global-set-key (kbd "C-c c") #'org-capture)
+	(global-set-key (kbd "C-c o") 'org-pomodoro)
 	
 	;; automatic line wrapping
 	(add-hook 'org-mode-hook (lambda() (setq truncate-lines nil)))
@@ -632,8 +632,21 @@ before packages are loaded."
 	(add-hook 'org-mode-hook #'variable-pitch-mode)
 	(add-hook 'org-mode-hook #'writeroom-mode)
 	(add-hook 'org-mode-hook #'hidden-mode-line-mode)
-        
-)
+	
+	;; org-pomodoro conf
+	(add-hook 'org-pomodoro-started-hook
+		(lambda ()
+			(org-notify "A new pomodoro has started, stay focused !!!")))
+      (add-hook 'org-pomodoro-finished-hook
+      	(lambda ()
+      		(org-notify "A pomodoro is finished, take a break !!!")))
+      (add-hook 'org-pomodoro-short-break-finished-hook
+      	(lambda ()
+      		(org-notify "A short break done, ready a new pomodoro !!!")))
+      (add-hook 'org-pomodoro-long-break-finished-hook
+      	(lambda ()
+      		(org-notify "A long break done, ready a new pomodoro !!!")))
+)	
 
 
 ;; Do not write anything past this comment. This is where Emacs will

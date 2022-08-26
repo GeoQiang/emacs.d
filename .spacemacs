@@ -51,9 +51,9 @@ This function should only modify configuration layer settings."
      multiple-cursors
      org
      ;;hugo
-     ;; (shell :variables
-     ;;        shell-default-height 30
-     ;;        shell-default-position 'bottom)
+     (shell :variables
+             shell-default-height 30
+             shell-default-position 'bottom)
      ;; spell-checking
      ;; syntax-checking
      ;; version-control
@@ -262,7 +262,7 @@ It should only modify the values of Spacemacs settings."
    ;; a non-negative integer (pixel size), or a floating-point (point size).
    ;; Point size is recommended, because it's device independent. (default 10.0)
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 13.0
+                               :size 14.0
                                :weight normal
                                :width normal)
 
@@ -572,7 +572,6 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-
 	;; set chinese font
 	(dolist (charset '(kana han symbol cjk-misc bopomofo))
  		 (set-fontset-font (frame-parameter nil 'font)
@@ -589,7 +588,7 @@ before packages are loaded."
 	;; org mode conf
 	(custom-set-faces
 		'(fixed-pitch ((t ( :family "Fira Code Retina" :height 110))))
-  		'(variable-pitch ((t (:family "ETBembo" :height 150))))
+  		'(variable-pitch ((t (:family "ETBembo" :height 180))))
   		'(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
 		'(org-level-1 ((t (:inherit outline-1 :height 1.2  :foreground "#black"))))
   		'(org-level-2 ((t (:inherit outline-2 :height 1.2  :foreground "#black"))))
@@ -667,7 +666,7 @@ This function is called at the very end of Spacemacs initialization."
  '(org-agenda-files
    '("~/Todo/remind.org" "/home/geo/Todo/project.org" "/home/geo/Todo/routines.org"))
  '(package-selected-packages
-   '(company-quickhelp pos-tip company-statistics easy-hugo ac-ispell auto-complete auto-yasnippet fuzzy helm-c-yasnippet helm-company add-node-modules-path company-web web-completion-data company counsel-css counsel swiper ivy emmet-mode helm-css-scss impatient-mode htmlize simple-httpd prettier-js pug-mode sass-mode haml-mode scss-mode slim-mode tagedit web-beautify web-mode yasnippet yasnippet-snippets hide-mode-line ws-butler writeroom-mode winum which-key volatile-highlights vim-powerline vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org term-cursor symon symbol-overlay string-inflection string-edit spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline-all-the-icons space-doc restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio font-lock+ flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-ediff evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav elisp-def editorconfig dumb-jump drag-stuff dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line)))
+   '(esh-help eshell-prompt-extras eshell-z multi-term shell-pop terminal-here vterm xterm-color company-quickhelp pos-tip company-statistics easy-hugo ac-ispell auto-complete auto-yasnippet fuzzy helm-c-yasnippet helm-company add-node-modules-path company-web web-completion-data company counsel-css counsel swiper ivy emmet-mode helm-css-scss impatient-mode htmlize simple-httpd prettier-js pug-mode sass-mode haml-mode scss-mode slim-mode tagedit web-beautify web-mode yasnippet yasnippet-snippets hide-mode-line ws-butler writeroom-mode winum which-key volatile-highlights vim-powerline vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org term-cursor symon symbol-overlay string-inflection string-edit spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline-all-the-icons space-doc restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio font-lock+ flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-ediff evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav elisp-def editorconfig dumb-jump drag-stuff dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -684,5 +683,5 @@ This function is called at the very end of Spacemacs initialization."
  '(org-level-7 ((t (:inherit outline-7 :height 1.2 :foreground "#black"))))
  '(org-level-8 ((t (:inherit outline-8 :height 1.2 :foreground "#black"))))
  '(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
- '(variable-pitch ((t (:family "ETBembo" :height 150)))))
+ '(variable-pitch ((t (:family "ETBembo" :height 180)))))
 )

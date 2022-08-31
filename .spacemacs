@@ -50,6 +50,9 @@ This function should only modify configuration layer settings."
      ;; markdown
      multiple-cursors
      org
+     (spotify :variables
+              counsel-spotify-client-id "<d2794122b2af42d4a622641a86e55613>"
+              counsel-spotify-client-secret "<80c3dfa7beb14b3893fca880b3abb256>")
      ;;hugo
      (shell :variables
              shell-default-height 30
@@ -69,7 +72,7 @@ This function should only modify configuration layer settings."
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(anki-editor)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -572,7 +575,14 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-	;; set chinese font
+  ;; org-refile conf
+  (setq org-outline-path-complete-in-steps nil)
+  (setq org-refile-targets '((org-agenda-files :level . 0)
+                             ("~/Dropbox/Todo/someday.org" :level . 0)
+                             ("~/Dropbox/Todo/trash.org" :level . 0)
+                             ("~/Dropbox/Todo/archive.org" :maxlevel . 1)))
+	(setq org-refile-use-outline-path 'file)
+  ;; set chinese font
 	(dolist (charset '(kana han symbol cjk-misc bopomofo))
  		 (set-fontset-font (frame-parameter nil 'font)
             	charset
@@ -649,9 +659,6 @@ before packages are loaded."
       		(org-notify "A long break done, ready a new pomodoro !!!")))
 )
 
-
-;; Do not write anything past this comment. This is where Emacs will
-;; auto-generate custom variable definitions.
 (defun dotspacemacs/emacs-custom-settings ()
   "Emacs custom settings.
 This is an auto-generated function, do not modify its content directly, use
@@ -664,9 +671,9 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(evil-want-Y-yank-to-eol nil)
  '(org-agenda-files
-   '("~/Todo/remind.org" "/home/geo/Todo/project.org" "/home/geo/Todo/routines.org"))
+   '("~/Dropbox/Todo/project.org" "/home/geo/Dropbox/Todo/routines.org" "/home/geo/Dropbox/Todo/remind.org"))
  '(package-selected-packages
-   '(esh-help eshell-prompt-extras eshell-z multi-term shell-pop terminal-here vterm xterm-color company-quickhelp pos-tip company-statistics easy-hugo ac-ispell auto-complete auto-yasnippet fuzzy helm-c-yasnippet helm-company add-node-modules-path company-web web-completion-data company counsel-css counsel swiper ivy emmet-mode helm-css-scss impatient-mode htmlize simple-httpd prettier-js pug-mode sass-mode haml-mode scss-mode slim-mode tagedit web-beautify web-mode yasnippet yasnippet-snippets hide-mode-line ws-butler writeroom-mode winum which-key volatile-highlights vim-powerline vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org term-cursor symon symbol-overlay string-inflection string-edit spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline-all-the-icons space-doc restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio font-lock+ flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-ediff evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav elisp-def editorconfig dumb-jump drag-stuff dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line)))
+   '(anki-editor esh-help eshell-prompt-extras eshell-z multi-term shell-pop terminal-here vterm xterm-color company-quickhelp pos-tip company-statistics easy-hugo ac-ispell auto-complete auto-yasnippet fuzzy helm-c-yasnippet helm-company add-node-modules-path company-web web-completion-data company counsel-css counsel swiper ivy emmet-mode helm-css-scss impatient-mode htmlize simple-httpd prettier-js pug-mode sass-mode haml-mode scss-mode slim-mode tagedit web-beautify web-mode yasnippet yasnippet-snippets hide-mode-line ws-butler writeroom-mode winum which-key volatile-highlights vim-powerline vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org term-cursor symon symbol-overlay string-inflection string-edit spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline-all-the-icons space-doc restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio font-lock+ flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-ediff evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav elisp-def editorconfig dumb-jump drag-stuff dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -685,3 +692,8 @@ This function is called at the very end of Spacemacs initialization."
  '(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
  '(variable-pitch ((t (:family "ETBembo" :height 180)))))
 )
+  "Emacs custom settings.
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization."
+

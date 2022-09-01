@@ -44,6 +44,7 @@ This function should only modify configuration layer settings."
      ;; better-defaults
      emacs-lisp
      ;;git
+     pdf
      neotree
      helm
      ;; lsp
@@ -576,11 +577,18 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
-   (load (expand-file-name "~/.emacs.d/private/lisp/init-org.el"))
-   (load (expand-file-name "~/.emacs.d/private/lisp/init-font.el"))
-   (load (expand-file-name "~/.emacs.d/private/lisp/init-neotree.el"))
-   
-   (global-set-key (kbd "C-c w") #'writeroom-mode)
+  (defconst my-emacs-d (file-name-as-directory "~/.emacs.d/private/")
+   "Directory of emacs.d.")
+  (defconst my-lisp-dir (concat my-emacs-d "lisp")
+    "Directory of personal configuration.")
+
+  (add-to-list 'load-path (expand-file-name my-lisp-dir))
+
+  (require 'init-org)
+  (require 'init-font)
+  (require 'init-neotree)
+
+  (global-set-key (kbd "C-c w") #'writeroom-mode)
 )
 
 (defun dotspacemacs/emacs-custom-settings ()

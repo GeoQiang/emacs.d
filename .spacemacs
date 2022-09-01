@@ -575,88 +575,12 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-  ;; org-refile conf
-  (setq org-outline-path-complete-in-steps nil)
-  (setq org-refile-targets '((org-agenda-files :level . 0)
-                             ("~/Dropbox/Todo/someday.org" :level . 0)
-                             ("~/Dropbox/Todo/trash.org" :level . 0)
-                             ("~/Dropbox/Todo/archive.org" :maxlevel . 1)))
-	(setq org-refile-use-outline-path 'file)
-  ;; set chinese font
-	(dolist (charset '(kana han symbol cjk-misc bopomofo))
- 		 (set-fontset-font (frame-parameter nil 'font)
-            	charset
-            	(font-spec :family "田英章楷书" :size 20.0)))
 
-	;; neotree conf
-	(setq projectile-switch-project-action 'neotree-projectile-action)
-	(setq neo-show-hidden-files nil)
-	(setq neo-smart-open t)
-	(global-set-key [f2] 'neotree-toggle)
-	(add-hook 'neotree-mode-hook #'hidden-mode-line-mode)
-
-	;; org mode conf
-	(custom-set-faces
-		'(fixed-pitch ((t ( :family "Fira Code Retina" :height 110))))
-  		'(variable-pitch ((t (:family "ETBembo" :height 180))))
-  		'(org-table ((t (:inherit fixed-pitch :foreground "#83a598"))))
-		'(org-level-1 ((t (:inherit outline-1 :height 1.2  :foreground "#black"))))
-  		'(org-level-2 ((t (:inherit outline-2 :height 1.2  :foreground "#black"))))
- 		'(org-level-3 ((t (:inherit outline-3 :height 1.2  :foreground "#black"))))
- 		'(org-level-4 ((t (:inherit outline-4 :height 1.2  :foreground "#black"))))
-  		'(org-level-5 ((t (:inherit outline-5 :height 1.2  :foreground "#black"))))
-  		'(org-level-6 ((t (:inherit outline-6 :height 1.2  :foreground "#black"))))
-  		'(org-level-7 ((t (:inherit outline-7 :height 1.2  :foreground "#black"))))
-  		'(org-level-8 ((t (:inherit outline-8 :height 1.2  :foreground "#black")))))
-
- 	;;modify the image size in org-mode
-	(setq org-image-actual-width (/ (display-pixel-width) 3))
-
-	(setq org-agenda-span 1)
-	(setq org-ellipsis " ▾ ")
-	(setq org-superstar-headline-bullets-list '(" " " " " " " " " " " "))
-	(setq org-hide-leading-stars t ;; hide * before headings
-      	org-hide-emphasis-markers t ;; show actually italicized text instead of /italicized text/
-      	)
-	(setq org-log-done 'time)
-	(setq org-todo-keywords '((sequence "TODO" "PROGRESS" "|" "DONE" "ABORT")))
-	(setq org-todo-keyword-faces
-      	'(("TODO" . "#ab5183")
-        	("PROGRESS" . "#4d96c6")
-        	("ABORT" . "#f78c2c")
-        	("DONE" . "#d92947")))
-	(setq hl-todo-keyword-faces
-      	'(("TODO" . "#ab5183")
-       	 ("PROGRESS" . "#4d96c6")
-        	("ABORT" . "#f78c2c")
-       	 ("DONE" . "#d92947")))
-
-	(global-set-key (kbd "C-c w") #'writeroom-mode)
-	(global-set-key (kbd "C-c l") #'org-store-link)
-	(global-set-key (kbd "C-c a") #'org-agenda)
-	(global-set-key (kbd "C-c c") #'org-capture)
-	(global-set-key (kbd "C-c o") 'org-pomodoro)
-
-	;; automatic line wrapping
-	(add-hook 'org-mode-hook (lambda() (setq truncate-lines nil)))
-
-	(add-hook 'org-mode-hook #'variable-pitch-mode)
-	(add-hook 'org-mode-hook #'writeroom-mode)
-	(add-hook 'org-mode-hook #'hidden-mode-line-mode)
-  (add-hook 'org-mode-hook 'turn-on-auto-fill)
-	;; org-pomodoro conf
-	(add-hook 'org-pomodoro-started-hook
-		(lambda ()
-			(org-notify "A new pomodoro has started, stay focused !!!")))
-      (add-hook 'org-pomodoro-finished-hook
-      	(lambda ()
-      		(org-notify "A pomodoro is finished, take a break !!!")))
-      (add-hook 'org-pomodoro-short-break-finished-hook
-      	(lambda ()
-      		(org-notify "A short break done, ready a new pomodoro !!!")))
-      (add-hook 'org-pomodoro-long-break-finished-hook
-      	(lambda ()
-      		(org-notify "A long break done, ready a new pomodoro !!!")))
+   (load (expand-file-name "~/.emacs.d/private/lisp/init-org.el"))
+   (load (expand-file-name "~/.emacs.d/private/lisp/init-font.el"))
+   (load (expand-file-name "~/.emacs.d/private/lisp/init-neotree.el"))
+   
+   (global-set-key (kbd "C-c w") #'writeroom-mode)
 )
 
 (defun dotspacemacs/emacs-custom-settings ()
@@ -671,7 +595,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(evil-want-Y-yank-to-eol nil)
  '(org-agenda-files
-   '("~/Dropbox/Todo/project.org" "/home/geo/Dropbox/Todo/routines.org" "/home/geo/Dropbox/Todo/remind.org"))
+   '("~/Dropbox/Todo/project.org" "~/Dropbox/Todo/routines.org" "~/Dropbox/Todo/remind.org"))
  '(package-selected-packages
    '(anki-editor esh-help eshell-prompt-extras eshell-z multi-term shell-pop terminal-here vterm xterm-color company-quickhelp pos-tip company-statistics easy-hugo ac-ispell auto-complete auto-yasnippet fuzzy helm-c-yasnippet helm-company add-node-modules-path company-web web-completion-data company counsel-css counsel swiper ivy emmet-mode helm-css-scss impatient-mode htmlize simple-httpd prettier-js pug-mode sass-mode haml-mode scss-mode slim-mode tagedit web-beautify web-mode yasnippet yasnippet-snippets hide-mode-line ws-butler writeroom-mode winum which-key volatile-highlights vim-powerline vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org term-cursor symon symbol-overlay string-inflection string-edit spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline-all-the-icons space-doc restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio font-lock+ flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-ediff evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav elisp-def editorconfig dumb-jump drag-stuff dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line)))
 (custom-set-faces

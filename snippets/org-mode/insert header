@@ -5,4 +5,3 @@
 #+TITLE: ${1:`(mapconcat #'capitalize (split-string (file-name-base (buffer-file-name)) "-") " ")`}
 #+DATE: ${2:`(format-time-string "<%Y-%m-%d %a %H:%M>" (current-time))`}
 #+AUTHOR: Geo Zhao
-#+setupfile: ../org-templates/post.org

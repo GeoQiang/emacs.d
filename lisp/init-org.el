@@ -1,7 +1,7 @@
 ;;; org-pomodoro conf
 
 (global-set-key (kbd "C-c o") 'org-pomodoro)
-	
+
 (add-hook 'org-pomodoro-started-hook
   (lambda ()
     (org-notify "A new pomodoro has started, stay focused !!!")))
@@ -14,7 +14,7 @@
 (add-hook 'org-pomodoro-long-break-finished-hook
   (lambda ()
     (org-notify "A long break done, ready a new pomodoro !!!")))
-	
+
 ;;; org-refile conf
 
 (setq org-refile-use-outline-path 'file)
@@ -22,19 +22,19 @@
 (setq org-refile-targets '((org-agenda-files :level . 0)
                            ("~/Dropbox/Todo/someday.org" :level . 0)
                            ("~/Dropbox/Todo/trash.org" :level . 0)
-                           ("~/Dropbox/Todo/archive.org" :maxlevel . 1)))
+                           ("~/Dropbox/Todo/archive.org" :maxlevel . 4)))
 
 ;;; beautifying
 
 (setq org-agenda-span 1)
 (setq org-ellipsis " ▾ ")
 (setq org-superstar-headline-bullets-list '(" " " " " " " " " " " "))
-(setq 
+(setq
   ;; hide * before headings
   org-hide-leading-stars t
   ;; show actually italicized text instead of /italicized text/
   org-hide-emphasis-markers t)
-  
+
 (setq org-log-done 'time)
 
 (setq org-todo-keywords '((sequence "TODO" "PROGRESS" "|" "DONE" "ABORT")))
@@ -44,13 +44,13 @@
     ("PROGRESS" . "#4d96c6")
     ("ABORT" . "#f78c2c")
     ("DONE" . "#d92947")))
-    
+
 (setq hl-todo-keyword-faces
   '(("TODO" . "#ab5183")
     ("PROGRESS" . "#4d96c6")
     ("ABORT" . "#f78c2c")
     ("DONE" . "#d92947")))
-    
+
 ;; modify the image size
 (setq org-image-actual-width (/ (display-pixel-width) 3))
 
@@ -67,7 +67,7 @@
   '(org-level-6 ((t (:inherit outline-6 :height 1.2  :foreground "#black"))))
   '(org-level-7 ((t (:inherit outline-7 :height 1.2  :foreground "#black"))))
   '(org-level-8 ((t (:inherit outline-8 :height 1.2  :foreground "#black")))))
-       	 
+
 ;;; hook conf
 
 (add-hook 'org-mode-hook #'variable-pitch-mode)

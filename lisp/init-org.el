@@ -14,6 +14,9 @@
 (add-hook 'org-pomodoro-long-break-finished-hook
   (lambda ()
     (org-notify "A long break done, ready a new pomodoro !!!")))
+(setq org-pomodoro-length 52)
+(setq org-pomodoro-short-break-length 17)
+(setq org-pomodoro-long-break-length 17)
 
 ;;; org-refile conf
 
